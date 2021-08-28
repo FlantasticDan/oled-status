@@ -1,5 +1,6 @@
-from typing import Dict
 import time
+import secrets
+from typing import Dict
 from threading import Thread
 
 import board
@@ -17,6 +18,8 @@ class OLED:
         self.i2c = board.I2C()
         self.display = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, self.i2c, addr=0x3C)
     
+        self.keys = []
+
         self.messages = []
         self.current = 0
         self.inverted = False
@@ -78,10 +81,92 @@ class OLED:
             
             # Advance to Next Message
             self.current += 1
-            if self.current > len(self.messages):
+            if self.current >= len(self.messages):
                 self.current = 0
-            self.update(self.messages[self.current], self.current)
+            try:
+                self.update(self.messages[self.current], self.current)
+            except:
+                continue
+    
+    def new_key(self) -> str:
+        """Generate a new, unique message key
 
+        Returns
+        -------
+        str
+            Unique Message Key
+        """        
+        while True:
+            key = secrets.token_hex(2)
+            if key not in self.keys:
+                self.keys.append(key)
+                return key
+
+    def add_message(self, header: str, body: str) -> str:
+        """Add a message to the status cycle
+
+        Parameters
+        ----------
+        header : str
+            Message Header
+        body : str
+            Content of the Message
+
+        Returns
+        -------
+        str
+            Message Key, to be used in futre requests to this message.
+        """        
+        message = {
+            'header': header,
+            'body': body,
+            'key': self.new_key()
+        }
+        self.messages.append(message)
+        return message['key']
+    
+    def replace_message(self, key: str, header: str, body: str) -> None:
+        """Replace a message in the status cycle with a new message
+
+        Parameters
+        ----------
+        key : str
+            Message Key
+        header : str
+            Message Header
+        body : str
+            Content of the Message
+        """        
+        for i, message in enumerate(self.messages):
+            if key == message['key']:
+                self.messages[i]['header'] = header
+                self.messages[i]['body'] = body
+                return
+    
+    def delete_message(self, key: str) -> None:
+        """Delete a message from the status cycle
+
+        Parameters
+        ----------
+        key : str
+            [description]
+        """        
+        for i, message in enumerate(self.messages):
+            if key == message['key']:
+                self.messages.pop(i)
+                self.keys.remove(key)
+                return
 
 if __name__ == '__main__':
-    OLED()
+    o = OLED()
+    a = o.add_message('Test', 'Message 1')
+    time.sleep(6)
+    b = o.add_message('Example', 'Important Info')
+    time.sleep(11)
+    o.replace_message(a, 'Test', 'Updated Message 1')
+    time.sleep(15)
+    o.delete_message(a)
+    time.sleep(10)
+    o.delete_message(b)
+    time.sleep(6)
+    c = o.add_message('oled-status', 'Test Completed')
