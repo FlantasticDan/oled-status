@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Manager",
+            "type": "python",
+            "request": "launch",
+            "module": "oled_status.manager"
+        },
+        {
             "name": "Python: Draw",
             "type": "python",
             "request": "launch",

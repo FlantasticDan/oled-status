@@ -1,0 +1,3 @@
+WIDTH = 128
+HEIGHT = 32
+VERSION = '0.0.1'

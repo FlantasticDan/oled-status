@@ -3,10 +3,10 @@ Image Drawing and Generation for 0.91" 128 by 32 OLED Displays
 """
 
 import pkg_resources
+
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
-WIDTH = 128
-HEIGHT = 32
+from . import WIDTH, HEIGHT
 
 def generate_status_image(header: str, body: str, footer: str, invert=False) -> Image.Image:    
     """Generates an image to be displayed on the OLED display
