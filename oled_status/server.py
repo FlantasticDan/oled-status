@@ -1,9 +1,12 @@
+import subprocess
+
 from flask import Flask, request
 
 from .manager import OLED
 
-app = Flask(__name__)
 oled = OLED()
+
+app = Flask(__name__)
 
 @app.post('/add')
 def add_message():
@@ -26,4 +29,6 @@ def delete_message(key):
     return 'OK'
 
 if __name__ == '__main__':
-    app.run(port=6533)
+    from gevent.pywsgi import WSGIServer
+    http_server = WSGIServer(('', 6533), app)
+    http_server.serve_forever()

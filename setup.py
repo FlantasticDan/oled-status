@@ -23,7 +23,7 @@ setuptools.setup(
     python_requires=">=3.9",
     install_requires=['httpx'],
     extra_requires={
-        "server": ['adafruit-circuitpython-ssd1306', 'Pillow', 'flask'],
+        "server": ['adafruit-circuitpython-ssd1306', 'Pillow', 'flask', 'gevent'],
         "draw": ['Pillow']
     },
     package_data={

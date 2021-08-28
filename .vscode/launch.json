@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Server",
+            "type": "python",
+            "request": "launch",
+            "module": "oled_status.server"
+        },
+        {
             "name": "Python: Manager",
             "type": "python",
             "request": "launch",
