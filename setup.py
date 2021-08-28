@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="oled-status",
-    version="0.0.1",
+    version="0.0.2",
     author="Daniel Flanagan",
     description="Status message logger for embedded systems equipped with a small OLED display.",
     long_description=long_description,
@@ -22,7 +22,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     python_requires=">=3.9",
     install_requires=['httpx'],
-    extra_requires={
+    extras_require={
         "server": ['adafruit-circuitpython-ssd1306', 'Pillow', 'flask', 'gevent'],
         "draw": ['Pillow']
     },
