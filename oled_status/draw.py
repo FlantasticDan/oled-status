@@ -1,3 +1,7 @@
+"""
+Image Drawing and Generation for 0.91" 128 by 32 OLED Displays
+"""
+
 import pkg_resources
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
