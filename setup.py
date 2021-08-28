@@ -25,5 +25,8 @@ setuptools.setup(
     extra_requires={
         "server": ['adafruit-circuitpython-ssd1306', 'Pillow', 'flask'],
         "draw": ['Pillow']
+    },
+    package_data={
+        "": ["*.tff"]
     }
 )
