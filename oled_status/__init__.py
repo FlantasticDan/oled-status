@@ -5,7 +5,7 @@ import httpx
 
 WIDTH = 128
 HEIGHT = 32
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 
 class Status:
     """OLED Display Status

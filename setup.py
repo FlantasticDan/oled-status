@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="oled-status",
-    version="0.0.2",
+    version="0.0.3",
     author="Daniel Flanagan",
     description="Status message logger for embedded systems equipped with a small OLED display.",
     long_description=long_description,
@@ -28,5 +28,6 @@ setuptools.setup(
     },
     package_data={
         "": ["*.tff"]
-    }
+    },
+    include_package_data=True
 )
