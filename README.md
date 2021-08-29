@@ -73,7 +73,7 @@ At this point the server can be started with `python -m oled_status.server` and 
     . venv/bin/activate
     python -m oled_status.server
     ```
-    2. Modify the script so it is executable: `sudo chmod x+ start-oled-status-server.sh`
+    2. Modify the script so it is executable: `sudo chmod +x start-oled-status-server.sh`
     3. Create a service the run the script at startup by writing the following file at `/etc/systemd/system/oled-status.service`:
     ```
     [Unit]
